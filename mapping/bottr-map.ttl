@@ -1,0 +1,90 @@
+@prefix xsd:	<http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+
+@prefix imf:	<http://ns.imfid.org/imf#> .
+@prefix ex:	<http://example.com/> .
+
+@prefix ottr:   <http://ns.ottr.xyz/0.4/> .
+
+[] a ottr:InstanceMap ;
+  ottr:source [ a ottr:H2Source ] ;
+  ottr:query """
+    SELECT
+      'imf:fulfills',
+      CONCAT('ex:', 'product/', REPLACE(REPLACE(TRIM(Name), ' ','%20'), '/', '%2F')),
+      LOWER(TRIM(Name)),
+      'imf:productAspect',
+      CONCAT('ex:', 'function/', REPLACE(REPLACE(TRIM(Function), ' ','%20'), '/', '%2F')),
+      LOWER(TRIM(Function)),
+      'imf:functionAspect',
+      Fulfill,
+      OriginalInformation,
+      DocumentName
+    FROM CSVREAD('llm-extracted-data/240827part_exc.csv',NULL,'fieldDelimiter=" fieldSeparator=,');
+  """ ;
+  ottr:argumentMaps _:BlockRelationArgMaps  ;
+  ottr:template ex:BlockRelation .
+
+[] a ottr:InstanceMap ;
+  ottr:source [ a ottr:H2Source ] ;
+  ottr:query """
+    SELECT
+      'imf:partOf',
+      CONCAT('ex:', 'function/', REPLACE(REPLACE(TRIM(Name), ' ','%20'), '/', '%2F')),
+      LOWER(TRIM(Name)),
+      'imf:functionAspect',
+      CONCAT('ex:', 'function/', REPLACE(REPLACE(TRIM(Function), ' ','%20'), '/', '%2F')),
+      LOWER(TRIM(Function)),
+      'imf:functionAspect',
+      Contain,
+      OriginalInformation,
+      DocumentName
+    FROM CSVREAD('llm-extracted-data/240827subfunction_exc.csv',NULL,'fieldDelimiter=" fieldSeparator=,');
+  """ ;
+  ottr:argumentMaps _:BlockRelationArgMaps  ;
+  ottr:template ex:BlockRelation .
+
+
+## Use a blank node to represent the list so it can be reused.
+_:BlockRelationArgMaps
+  rdf:first
+    [ ottr:type owl:ObjectProperty ] ;
+  rdf:rest (
+    [ ottr:type ottr:IRI ]
+    [ ottr:type xsd:string ]
+    [ ottr:type owl:NamedIndividual ]
+    [ ottr:type ottr:IRI ]
+    [ ottr:type xsd:string ]
+    [ ottr:type owl:NamedIndividual ]
+    [ ottr:type xsd:string ]
+    [ ottr:type xsd:string ]
+    [ ottr:type xsd:string ]
+  ) .
+
+########
+
+[] a ottr:InstanceMap ;
+  ottr:source [ a ottr:H2Source ] ;
+  ottr:query """
+    SELECT
+      CONCAT('ex:', 'attribute/', REPLACE(REPLACE(TRIM(Name), ' ','%20'), '/', '%2F')),
+      LOWER(TRIM(Name)),
+      CONCAT('ex:', 'product/', REPLACE(REPLACE(TRIM(Part), ' ','%20'), '/', '%2F')),
+      hasAttribute,
+      Avalue,
+      OriginalInformation,
+      DocumentName
+    FROM CSVREAD('llm-extracted-data/240903parameter_exc.csv',NULL,'fieldDelimiter=" fieldSeparator=,');
+  """ ;
+  ottr:argumentMaps (
+    [ ottr:type ottr:IRI ]
+    [ ottr:type xsd:string ]
+    [ ottr:type ottr:IRI ]
+    [ ottr:type xsd:string ]
+    [ ottr:type xsd:string ]
+    [ ottr:type xsd:string ]
+    [ ottr:type xsd:string ]
+  ) ;
+  ottr:template ex:AttributeRelation .

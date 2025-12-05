@@ -1,0 +1,96 @@
+(1)[function - subfunction:]
+Read and understand these documents first. You are an information extraction expert, good at extracting industrial design information from lengthy documents. Please first find all sub-functions related to the functions in List A {"Removing thermal energy", "Reacting chemicals", "Condensing", "Separating", "Stripping","Supplying thermal energy","Compressing", "Storing"}  from the document. This list describes main functions of Tennessee Eastman Process.  For each sub-function generate a JSON format. The JSON are separated by "," and the format example is as follows: 
+{
+"Name": " ",
+"Aspect": "Function", 
+"Function": " ",
+"Explanation": " ", 
+"OriginalInformation": " ",
+"DocumentName": " ",
+}
+Among them,
+The value of "Name" is filled by the sub-function name;
+The value of "Aspect" is "Function"; 
+The value of "Function" is filled by the function name related to the sub-function in List A;
+The value of "Explanation" is filled by the explanation of your answer why the sub-function is extracted. If the original text does not provide a direct relationship between sub-function and function, you can fill in "Relationship not detailed in the document" or "Not described in the original document". 
+The value of "OriginalInformation" is filled by the original text of the relationship between sub-functions and functions. If the original text does not provide enough information to describe the relationship between sub-functions and functions, you can fill in "null" or "Not available in the provided document excerpt"; 
+The value of "DocumentName" is filled by the document name. 
+
+(2) [subcomponent-Component]
+Please read and understand the given documents first. You are an information extraction expert, good at extracting industrial design information from lengthy documents. Please find all the components related to the functions in List A {"Removing thermal energy", "Reacting chemicals", "Condensing", "Separating", "Stripping","Supplying thermal energy","Compressing", "Storing"}  from the document. This list describes main functions of Tennessee Eastman Process. To extract the physical structure of this system, please find the related component to these functions, and then their subcomponents. For each subcomponent generate a JSON format. The JSON are separated by "," and the format example is as follows: 
+    {
+    "Name": " ",
+    "Aspect": "Product", 
+    "Component": " ",
+    "Explanation": " ", 
+    "OriginalInformation": " ",
+    "DocumentName": " ",
+    }
+Among them,
+The value of "Name" is filled by the subcomponent name;
+The value of "Aspect" is "Product"; 
+The value of "Component" is filled by the name of  the related component to the function;
+The value of "Explanation" is filled by the explanation of your answer why the subcomponent is extracted as part of the component. If the original text does not provide a direct relationship between these components, you can fill in "Relationship not detailed in the document" or "Not described in the original document". 
+The value of "OriginalInformation" is filled by the original text related to this extraction of subcomponents. If the original text does not provide enough information to describe the relationship between the subcomponent and the component, you can fill in "Not available in the provided document excerpt"; 
+The value of "DocumentName" is filled by the document name.
+
+
+(3) [Component-Component]
+Please read and understand the given documents first. You are an information extraction expert, good at extracting industrial design information from lengthy documents. Please find all the components related to the functions in List A {"Removing thermal energy", "Reacting chemicals", "Condensing", "Separating", "Stripping","Supplying thermal energy","Compressing", "Storing"}  from the document.  This list describes main functions of Tennessee Eastman Process. To explore the connections between the found components. For each component generate a JSON format. The JSON are separated by "," and the format example is as follows: 
+    {
+    "Name": " ",
+    "Aspect": "Product", 
+    "Related component": " ",
+    "Explanation": " ", 
+    "OriginalInformation": " ",
+    "DocumentName": " ",
+    }
+Among them,
+The value of "Name" is filled by the component name;
+The value of "Aspect" is "Product"; 
+The value of "Related component" is filled by the name of  the related component;
+The value of "Explanation" is filled by the explanation of your answer why the related component is extracted. If the original text does not provide a direct relationship between these components, you can fill in "Relationship not detailed in the document" or "Not described in the original document". 
+The value of "OriginalInformation" is filled by the original text related to this extraction of related two components. If the original text does not provide enough information to describe the relationship between these related two components, you can fill in "Not available in the provided document excerpt"; 
+The value of "DocumentName" is filled by the document name. 
+
+(4) [function - product]
+Please read and understand these provided documents again.
+And please find all the implementation components/products/equipment/instrumentation related to the functions in List A {"Removing thermal energy", "Reacting chemicals", "Condensing", "Separating", "Stripping", "Supplying thermal energy", "Compressing",  "Storing"} from the document. This list describes main functions of Tennessee Eastman Process. For each object, generate a JSON format. The JSON are separated by "," and the format example is as follows: 
+{
+	"Name": " ",
+	"Aspect": "Product",
+	"Function": " ",
+	"Explanation": " ",
+	"OriginalInformation": " ",
+	"DocumentName": " ",
+}
+Among them,
+The value of "Name" is filled by the name of implementation components/products/equipment/instrumentation;
+The value of "Aspect" is "Product"; 
+The value of "Function" is filled by the function name related to the extracted component in List A;
+The value of "Explanation" is filled by the explanation of your answer why the implementation component/product/equipment/instrumentation is extracted. If the original text does not provide a direct relationship between the component and function, you can fill in "Relationship not detailed in the document" or "Not described in the original document". 
+The value of "OriginalInformation" is filled by the original text of the relationship between the component and the function. If the original text does not provide enough information to describe the relationship between the component and the function, you can fill in "null" or "Not available in the provided document excerpt"; 
+The value of "DocumentName" is filled by the document name. 
+
+(5) [product - parameter]
+Please read and understand these provided documents again.
+And please find all the implementation components/products/equipment/instrumentation related to the functions in List A {"Removing thermal energy", "Reacting chemicals", "Condensing", "Separating", "Stripping", "Supplying thermal energy", "Compressing",  "Storing"} from the document. This list describes main functions of Tennessee Eastman Process.  For each object, generate a JSON format. The JSON are separated by "," and the format example is as follows: 
+{
+	"Name": " ",
+	"Aspect": "Parameter",
+	"Product": " ",
+        "Value": " ",
+        "UoM": " ",
+	"Explanation": " ",
+	"OriginalInformation": " ",
+	"DocumentName": " ",
+}
+Among them,
+The value of "Name" is filled by the name of related parameter/attribute;
+The value of "Aspect" is "Parameter"; 
+The value of "Product" is filled by the name of implementation components/products/equipment/instrumentation related to the function in List A;
+The value of "Value" is filled by the numeric value of the parameter/attribute. If there is no such value, fill in Null.
+The value of "UoM" is filled by the unit of measure of the extracted parameter. If there is no such unit, fill in Null.
+The value of "Explanation" is filled by the explanation of your answer why the parameter is extracted. If the original text does not provide a direct relationship between the component and parameter, you can fill in "Relationship not detailed in the document" or "Not described in the original document". 
+The value of "OriginalInformation" is filled by the original text of the relationship between the component and the parameter. If the original text does not provide enough information to describe the relationship between the component and the parameter, you can fill in "null" or "Not available in the provided document excerpt"; 
+The value of "DocumentName" is filled by the document name. 
